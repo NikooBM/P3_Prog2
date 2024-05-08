@@ -22,6 +22,7 @@ public:
     string getName() const {return name;};
     int getNumFollowers() const {return numFollowers;};
     double getMoney() const {return money;};
+    void setNumFollowers(int nFollowers);
 };
 
 #endif

@@ -72,3 +72,10 @@ ostream& operator<<(ostream &os,const SNFollowers &snf){
     os<<"["<<snf.name<<"|"<<snf.numFollowers<<"|"<<snf.money<<"]";
     return os;
 }
+
+void SNFollowers::setNumFollowers(int nFollowers){
+    numFollowers=nFollowers;
+    if (numFollowers<0){
+        numFollowers=0;
+    }
+}
