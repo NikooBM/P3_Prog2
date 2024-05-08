@@ -28,7 +28,8 @@ void Influencer::addFollowers(string snName,int nFollowers){
     try{
         SNFollowers sn(snName, nFollowers);
         for(unsigned int i=0;i<followers.size();i++){
-            if(followers[i].getName()==snName){
+            string nombre=followers[i].getName();
+            if(nombre==snName){
                 nFollowers+= static_cast<int>(followers[i].getNumFollowers());
                 followers[i].setNumFollowers(nFollowers);
                 found = true;

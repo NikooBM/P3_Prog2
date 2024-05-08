@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Influencer.h"
 using namespace std;
+class Influencer;
 
 class Agency{
     friend ostream& operator<<(ostream &os,const Agency &ag);

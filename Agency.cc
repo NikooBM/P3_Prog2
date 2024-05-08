@@ -27,13 +27,14 @@ void Agency::addInfluencer(string infName,double commission){
     bool error=false;
     
     for(unsigned int i=0;i<influencers.size();i++){
-        if(influencers[i].getName()==infName){
+        string nombre=influencers[i].getName();
+        if(nombre==infName){
             Util::error(ERR_DUPLICATED);
             error=true;
         }
     }
     if(!error){
-        Influencer inf=Influencer(infName);
+        Influencer inf(infName);
         try{
             inf.setCommission(commission);
             influencers.push_back(inf);
@@ -86,7 +87,9 @@ void Agency::deleteInfluencer (string infName){
         double commission = inf->collectCommission();
         money += commission;
         for (unsigned int i=0; i < influencers.size(); ++i) {
-            if (influencers[i].getName() == infName) {
+            string nombre=influencers[i].getName();
+            
+            if (nombre== infName) {
                 influencers.erase(influencers.begin() + i);
                 return;
             }
@@ -106,7 +109,8 @@ void Agency::deleteInfluencer (string infName){
 double Agency::collectCommissions(){
     double totalCommission = 0;
     for (unsigned int i=0;i<influencers.size();i++){
-        totalCommission += influencers[i].collectCommission();
+        double inflCommission= influencers[i].collectCommission();
+        totalCommission += inflCommission;
     }
     money += totalCommission;
     return totalCommission;
@@ -116,7 +120,13 @@ ostream& operator<<(ostream &os,const Agency &ag){
 
     os << "Agency: " << ag.getName() << " [" << ag.getMoney() << "]" << endl;
     for (unsigned int i = 0; i < ag.influencers.size(); ++i) {
-        os << "Influencer: " << ag.influencers[i].getName() << " (" << ag.influencers[i].getCommission() << ")" << endl;
+        string nombre=ag.influencers[i].getName();
+        double commission=ag.influencers[i].getCommission();
+        //int nFollowers= ag.influencers[i].getFollowers();
+        
+        
+        os << "Influencer: " << nombre << " (" << commission << ")" << endl;
+        
         vector<SNFollowers> followers = ag.influencers[i].getFollowers();
         
         for (unsigned int j = 0; j <followers.size(); ++j) {
