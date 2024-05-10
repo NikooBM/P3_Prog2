@@ -15,6 +15,10 @@ SNFollowers::SNFollowers(string name,int initialFollowers){
     }
     
     if(!SNData::checkSN(name)){
+        double monetizing= SNData::getAvgMonetizing(name);
+        double rating= SNData::getAvgRating(name);
+        SNData::newSocialNetwork(name,rating,monetizing);
+        
         throw EXCEPTION_UNKNOWN_SN;
     }
 
@@ -39,13 +43,16 @@ void SNFollowers::addEvent(double rating){
     double ratingRelation=rating/static_cast<double>(SNData::getAvgRating(name));
     
     if(ratingRelation>0.8){
+
         int addedFollowers=static_cast<int>(numFollowers*ratingRelation);
         numFollowers+= addedFollowers;
         
         money=addedFollowers*static_cast<double>(SNData::getAvgMonetizing(name));
+        
     }
     
     if(ratingRelation<0.8){
+        
         int lostFollowers=static_cast<int>((0.9-ratingRelation)*numFollowers);
             
         if(numFollowers>=lostFollowers){
@@ -54,7 +61,9 @@ void SNFollowers::addEvent(double rating){
         else{
             numFollowers=0;
         }
+        
     }
+    
 }
 
 double SNFollowers::collectCommission(double commission){
