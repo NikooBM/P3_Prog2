@@ -78,6 +78,8 @@ void Agency::newEvent(vector<string> infNames,int nsns, string snNames[],double 
                 Util::debug(e);
             }
         }
+        snNames++;
+        evRats++;
      }
 }
 

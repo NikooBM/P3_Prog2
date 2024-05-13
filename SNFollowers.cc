@@ -39,20 +39,21 @@ void SNFollowers::addEvent(double rating){
     if(rating<0){
         throw invalid_argument(to_string(rating));
     }
+    double avgRat=SNData::getAvgRating(name);
     
-    double ratingRelation=rating/static_cast<double>(SNData::getAvgRating(name));
+    double ratingRelation=rating/avgRat;
     
     if(ratingRelation>0.8){
 
         int addedFollowers=static_cast<int>(numFollowers*ratingRelation);
-        numFollowers+= addedFollowers;
+        numFollowers += addedFollowers;
         
-        money=addedFollowers*static_cast<double>(SNData::getAvgMonetizing(name));
-        
+        double monetizing= (SNData::getAvgMonetizing(name));
+        money=addedFollowers*monetizing;
+    
     }
     
     if(ratingRelation<0.8){
-        
         int lostFollowers=static_cast<int>((0.9-ratingRelation)*numFollowers);
             
         if(numFollowers>=lostFollowers){
@@ -63,7 +64,6 @@ void SNFollowers::addEvent(double rating){
         }
         
     }
-    
 }
 
 double SNFollowers::collectCommission(double commission){
