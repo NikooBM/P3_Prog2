@@ -49,7 +49,7 @@ void SNFollowers::addEvent(double rating){
         numFollowers += addedFollowers;
         
         double monetizing= (SNData::getAvgMonetizing(name));
-        money=addedFollowers*monetizing;
+        money+=addedFollowers*monetizing;
     
     }
     

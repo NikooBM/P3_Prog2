@@ -51,10 +51,14 @@ void Influencer::addFollowers(string snName,int nFollowers){
 }
 
 void Influencer::addEvent(double rat[],string sn[],int nsns){
-    for (int i=0; i<nsns;++i){
-        for (unsigned int j=0; j<followers.size();++j){
-            if(SNData::checkSN(sn[i])){
-                    followers[j].addEvent(rat[i]);
+    if (nsns < 1) {
+        return;
+    }
+
+    for (int i = 0; i < followers.size(); ++i) {
+        for (int j = 0; j < nsns; ++j) {
+            if (followers[i].getName() == sn[j] && SNData::checkSN(sn[j])) {
+                followers[i].addEvent(rat[j]);
             }
         }
     }
