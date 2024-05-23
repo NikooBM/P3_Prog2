@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "Influencer.h"
 using namespace std;
 class Influencer;

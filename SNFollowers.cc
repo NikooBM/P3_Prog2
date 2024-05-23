@@ -22,13 +22,13 @@ SNFollowers::SNFollowers(string name,int initialFollowers){
         throw EXCEPTION_UNKNOWN_SN;
     }
 
-    numFollowers=initialFollowers;
-    money=0;
+    this->numFollowers=initialFollowers;
+    this->money=0;
     this->name=name;
 }
 
 void SNFollowers::addFollowers(int nFollowers){
-    numFollowers=nFollowers+numFollowers;
+    numFollowers+=nFollowers;
     
     if(numFollowers<0){
         numFollowers=0;
@@ -80,11 +80,4 @@ double SNFollowers::collectCommission(double commission){
 ostream& operator<<(ostream &os,const SNFollowers &snf){
     os<<"["<<snf.name<<"|"<<snf.numFollowers<<"|"<<snf.money<<"]";
     return os;
-}
-
-void SNFollowers::setNumFollowers(int nFollowers){
-    numFollowers=nFollowers;
-    if (numFollowers<0){
-        numFollowers=0;
-    }
 }

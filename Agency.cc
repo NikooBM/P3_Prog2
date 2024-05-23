@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 Agency::Agency(string name,double initialMoney){
@@ -122,9 +123,7 @@ ostream& operator<<(ostream &os,const Agency &ag){
     os << "Agency: " << ag.getName() << " [" << ag.getMoney() << "]" << endl;
     for (unsigned int i = 0; i < ag.influencers.size(); ++i) {
         string nombre=ag.influencers[i].getName();
-        double commission=ag.influencers[i].getCommission();
-        //int nFollowers= ag.influencers[i].getFollowers();
-        
+        double commission=ag.influencers[i].getCommission();     
         
         os << "Influencer: " << nombre << " (" << commission << ")" << endl;
         
