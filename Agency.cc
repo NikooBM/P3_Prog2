@@ -70,7 +70,7 @@ void Agency::newEvent(vector<string> infNames,int nsns, string snNames[],double 
     for(unsigned int i=0; i<infNames.size(); ++i){
          try {
              Influencer* inf = searchInfluencer(infNames[i]);
-             inf->addEvent(evRats,snNames,nsns);
+             inf->addEvent(nsns,snNames,evRats);
          }
         catch(Exception e){
             if(e==EXCEPTION_INFL_NOT_FOUND){
@@ -91,7 +91,7 @@ void Agency::deleteInfluencer (string infName){
         for (unsigned int i=0; i < influencers.size(); ++i) {
             string nombre=influencers[i].getName();
             
-            if (nombre== infName) {
+            if (nombre == infName) {
                 influencers.erase(influencers.begin() + i);
                 return;
             }

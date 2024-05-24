@@ -52,11 +52,11 @@ void Influencer::addFollowers(string snName,int nFollowers){
     }
 }
 
-void Influencer::addEvent(double rat[],string sn[],int nsns){
+void Influencer::addEvent(int nsns,string sn[],double rat[]){
     if (nsns < 1) {
         return;
     }
-
+    
     for (unsigned int i = 0; i < followers.size(); ++i) {
         for (int j = 0; j < nsns; ++j) {
             if (followers[i].getName() == sn[j] && SNData::checkSN(sn[j])) {
@@ -71,30 +71,18 @@ double Influencer::collectCommission(){
     double totalCommission = 0;
     
     for (unsigned int i=0; i<followers.size();++i){
-        totalCommission += followers[i].collectCommission(commission);
+        if(followers[i].getMoney()>0){
+            totalCommission += followers[i].collectCommission(commission);
+        }
     }
     return totalCommission;
 }
 
 ostream& operator<<(ostream &os,const Influencer &inf){
-    vector <string>SNnames;
-    bool impressed = false;
-    
     os << "Influencer: " << inf.getName() << " (" << inf.getCommission() << ")" << endl;
     for (unsigned int i = 0; i < inf.getFollowers().size(); ++i) {
-        if(SNData::checkSN(inf.getFollowers()[i].getName())){
-            for (unsigned int j=0;j<SNnames.size();j++){
-                if(SNnames[j] == inf.getFollowers()[i].getName()){
-                    impressed = true;
-                }
-                if (!impressed){
-                    os<< "["<<inf.getFollowers()[i].getName()<<"|"<<inf.getFollowers()[i].getNumFollowers()<<"|"<<inf.getFollowers()[i].getMoney()<<"]";
-                    SNnames.push_back(inf.getFollowers()[i].getName());
-                    impressed=false;
-                }
-            }
-        }
+        os << inf.getFollowers()[i];
+        os << endl;
     }
-    os << endl;
     return os;
 }

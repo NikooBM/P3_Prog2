@@ -10,9 +10,10 @@
 #include <iostream>
 #include <sstream>
 using namespace std;
+class SNFollowers;
 
 class Influencer{
-    friend ostream& operator<<(ostream &os,const SNFollowers &inf);
+    friend ostream& operator<<(ostream &os,const Influencer &inf);
 private:
     string name;
     double commission;
@@ -22,7 +23,7 @@ public:
     Influencer (string name);
     void setCommission(double commission);
     void addFollowers(string snName,int nFollowers);
-    void addEvent(double rat[],string sn[],int nsns);
+    void addEvent(int nsns,string sn[],double rat[]);
     double collectCommission();
     string getName() const {return name;};
     double getCommission() const {return commission;};
